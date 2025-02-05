@@ -19,7 +19,7 @@ SESSION_NAME = f'bot_session_{int(time.time())}'
 # Add your channel username here
 CHANNEL_USERNAME = '@husr12'  # Replace with your channel username
 
-# # قائمة بأسماء السور القرآنية
+# قائمة بأسماء السور القرآنية
 SURAH_NAMES = [
     "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس",
     "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه",
@@ -57,7 +57,6 @@ async def download_and_upload_sura(client, sura_number):
                 try:
                     print(f'📤 جاري رفع {file_name} إلى تيليجرام (المحاولة {attempt + 1})...')
 
-                    # استخدام types.DocumentAttributeAudio بدلاً من events.Raw
                     attributes = [
                         types.DocumentAttributeAudio(
                             duration=0,  # سيتم تحديده تلقائياً
@@ -108,7 +107,8 @@ async def main():
         await client.start(bot_token=bot_token)
         print("✅ تم تشغيل البوت بنجاح!")
 
-        for sura_number in range(1, 115):
+        # تعديل ليبدأ من سورة طه (رقم 20) حتى الناس (114)
+        for sura_number in range(20, 115):
             try:
                 await download_and_upload_sura(client, sura_number)
                 await asyncio.sleep(5)
